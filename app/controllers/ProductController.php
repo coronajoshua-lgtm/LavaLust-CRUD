@@ -11,7 +11,11 @@ class ProductController extends Controller {
 
     public function index()
     {
-        $data['products'] = $this->ProductModel->get_all_products();
+        $data = [
+            'products' => $this->ProductModel->get_all_products(),
+            'is_admin' => $this->session->userdata('role') === 'admin',
+        ];
+
         $this->call->view('products/index', $data);
     }
 
